@@ -305,8 +305,6 @@ bot.on('message', message => {
             precp = 50
         }
         var degz = Math.round((((((niveau1*0.4)+2)*attak1*puis)/(def2*50)+2)) * 1) / 1
-
-        console.log("Type : " + type + " & " + typdegz + " Crit = " + crit)
         var hit = (precp / esqui) * prec
         var probahit = Math.floor(Math.random() * Math.floor(100))
         console.log(hit + "/" + probahit)
@@ -328,24 +326,18 @@ bot.on('message', message => {
 })
 
 bot.on('message', message => {
-    if(message.content.includes("!!vs ")){
-        var vs1 = message.content.split(" ")[1]
-        var vs2 = message.content.split(" ")[2]
+    if(message.content.includes("!!pv ")){
+        var pvp = message.content.split(" ")[1]
         for(var ipv1 = 0; ipv1 < dataBankPersos.length; ipv1++){
-          if(dataBankPersos[ipv1][0] === vs1){
+          if(dataBankPersos[ipv1][0] === pvp){
             var nom1 = dataBankPersos[ipv1][0]
             var pv1 = dataBankPersos[ipv1][2]
           }
         }
-        for(var ipv2 = 0; ipv2 < dataBankPersos.length; ipv2++){
-          if(dataBankPersos[ipv2][0] === vs2){
-            var nom2 = dataBankPersos[ipv2][0]
-            var pv2 = dataBankPersos[ipv2][2]
-          }
+        message.channel.send("> " + nom1 + " possède " + pv1 + "PV max.")
         }
-        message.chennel.send(nom1 + "(" + pv1 + "PV)    ***VS***    " + nom2 + "(" + pv2 + "PV)")
     }
-})
+)
 
 bot.on('message', message => {
     if(message.content === "!!read"){
@@ -354,6 +346,12 @@ bot.on('message', message => {
         read()
         readPersos()
         console.log(dataBank)
+        console.log(dataBankPersos)
+    }
+})
+
+bot.on('message', message => {
+    if(message.content === "!!check"){
         console.log(dataBankPersos)
     }
 })
